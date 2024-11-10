@@ -4,9 +4,10 @@ from base.SummarizationVisualization import SummarizeForVisualization
 from base.Scrape import ScrapeSetopati,ScrapeEkantipur,ScrapeBBC,ScrapeKathmanduPost
 from flask_cors import CORS
 import sqlite3  as sql
+# python --version
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins="http://localhost:3000")
 category_class = ['business', 'entertainment', 'politics', 'sport', 'tech']
 global row_dict_flag
 row_dict_flag = None
