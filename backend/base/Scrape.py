@@ -58,7 +58,7 @@ class ScrapeEkantipur:
                 soup = BS(web_page.content,'html.parser')
                 
                 description = []
-                row = soup.select(".normal")h
+                row = soup.select(".normal")
 
                 description_div = soup.select("article")
 
