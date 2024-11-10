@@ -71,55 +71,46 @@ class SummarizeForVisualization:
         cnt=self.news.count("।")+1
         return cnt
     
-    def summarize_in_sentence_number(self,number):
+    def summarize_in_sentence_number(self, number):
         paragraph = self.news
         number = number + 1
         tf_idf_each_sentence = {}
-        if self.language=="en":
-            each_sentence=paragraph.split(".")
+        
+        if self.language == "en":
+            each_sentence = paragraph.split(".")
             if "" in each_sentence:
                 each_sentence.remove("")
-            sentence_count=self.count_sentence_eng()
+            sentence_count = self.count_sentence_eng()
         else:
-            #paragraph=paragraph.replace("।","|")
-            each_sentence=paragraph.split("।")
+            each_sentence = paragraph.split("।")
             if "" in each_sentence:
                 each_sentence.remove("")
-            sentence_count=self.count_sentence_nep()
-            
-        
-        if  (number>sentence_count):
-            return("ERROR: Summarization line exceeds total sentence count")
-        
-        elif (number == 0):
-            return("ERROR: Chosen Zero")
-        
-        else:
-            summarized_indexes = {}
-            for index in range(len(each_sentence)):
-                tf_idf = sum(self.calc_tf_idf(each_sentence[index]))
-                each_sentence[index] = f" ({index+1}) " + each_sentence[index]
+            sentence_count = self.count_sentence_nep()
 
-                tf_idf_each_sentence[index + 1] = format(tf_idf,".2f")
-                
-                summarized_indexes[tf_idf] = index
-                
-            sorted_summarized_indexs = sorted(summarized_indexes.items())[-number:]
-            sorted_summarized_indexs = sorted([(t[1], t[0]) for t in sorted_summarized_indexs])
-            sorted_summarized_indexs = [x[0] for x in sorted_summarized_indexs]
-            summarized = []
-            
-            for index in sorted_summarized_indexs:
-                summarized.append(each_sentence[index]) 
-            summarized_str = str()
-            if self.language == 'en':
-                for summarized_sentence in summarized:
-                    summarized_str += summarized_sentence
-                    summarized_str += '. '
-            else:
-                for summarized_sentence in summarized:
-                    summarized_str += summarized_sentence
-                    summarized_str += ' | '
-            
-            return summarized_str,tf_idf_each_sentence
-                
+        if number > sentence_count:
+            return "ERROR: Summarization line exceeds total sentence count", {}
+        elif number == 0:
+            return "ERROR: Chosen Zero", {}
+        
+        summarized_indexes = {}
+        for index in range(len(each_sentence)):
+            tf_idf = sum(self.calc_tf_idf(each_sentence[index]))
+            each_sentence[index] = f" ({index + 1}) " + each_sentence[index]
+            tf_idf_each_sentence[index + 1] = format(tf_idf, ".2f")
+            summarized_indexes[tf_idf] = index
+
+        sorted_summarized_indexs = sorted(summarized_indexes.items())[-number:]
+        sorted_summarized_indexs = sorted([(t[1], t[0]) for t in sorted_summarized_indexs])
+        sorted_summarized_indexs = [x[0] for x in sorted_summarized_indexs]
+        
+        summarized = []
+        for index in sorted_summarized_indexs:
+            summarized.append(each_sentence[index])
+        
+        summarized_str = ""
+        if self.language == 'en':
+            summarized_str = ". ".join(summarized) + "."
+        else:
+            summarized_str = " | ".join(summarized) + " |"
+        
+        return summarized_str, tf_idf_each_sentence

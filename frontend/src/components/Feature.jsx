@@ -10,25 +10,26 @@ const Feature = () => {
       <h1 className="feat-title">Features</h1>
       <div className="a-container">
         <a href="./classify">
-         <FeatureBox
-          image={featureimage}
-          title="Classify"
-          detail="Bringing Clarity to the News: Automatically Categorize and Organize"
-        />x
-      </a>
+          <FeatureBox
+            image={featureimage}
+            title="Classify"
+            detail="Bringing Clarity to the News: Automatically Categorize and Organize"
+          />
+          x
+        </a>
         <a href="./classify">
-           <FeatureBox
-             image={featureimage1}
-             title="Summarize"
+          <FeatureBox
+            image={featureimage1}
+            title="Summarize"
             detail="Get the gist in a jiffy: Summarize News Stories Effortlessly with Our News Summarizer."
           />
-        </a> */}
+        </a>
         <a href="./newscrape">
-        <FeatureBox
-          image={featureimage2}
-          title="Scrape"
-          detail="Stay Ahead of the Game: Automatically Extract the Latest News with Our News Scraper."
-        />
+          <FeatureBox
+            image={featureimage2}
+            title="Scrape"
+            detail="Stay Ahead of the Game: Automatically Extract the Latest News with Our News Scraper."
+          />
         </a>
       </div>
     </div>

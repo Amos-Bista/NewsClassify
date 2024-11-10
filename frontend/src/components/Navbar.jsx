@@ -25,7 +25,7 @@ const Navbar = ({ location }) => {
   return (
     <nav className={nav ? `nav active` : `nav`}>
       <a href="/#" className="logo" onClick={() => setClickNav(0)}>
-        <img src={logo} alt="" />
+        {/* <img src={logo} alt="" /> */}
       </a>
       <input type="checkbox" className="menu-btn" id="menu-btn" />
       <label className="menu-icon" htmlFor="menu-btn">
